@@ -5,6 +5,8 @@ import 'package:flutter/widgets.dart';
 import 'package:portfolio_app/authentication/auth_service.dart';
 import 'package:portfolio_app/components/Auth_TextField.dart';
 import 'package:portfolio_app/components/Confirm_Button.dart';
+import 'package:portfolio_app/pages/home/views/menu_layer.dart';
+import 'package:portfolio_app/pages/signup/views/signup.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -21,12 +23,14 @@ class _LoginPageState extends State<LoginPage> {
     String password = _passwordController.text.trim();
 
     if (email.isEmpty || password.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Please enter email or password')));
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Please enter email and password')));
       return;
     }
 
     try {
       await AuthService.login(email, password);
+
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MenuLayer()));
     } on FirebaseAuthException catch (e) {
       showDialog(
         context: context,
@@ -86,7 +90,30 @@ class _LoginPageState extends State<LoginPage> {
                         obscure: true,
                       ),
                       SizedBox(height: 20),
-                      ConfirmButton(text: 'Sign in', callback: _login)
+                      ConfirmButton(text: 'Sign in', callback: _login),
+                      SizedBox(height: 20),
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpPage()));
+                        },
+                        child: const Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Don\'t have an account?',
+                              style: TextStyle(fontFamily: 'Titillium Web', fontSize: 15),
+                            ),
+                            SizedBox(width: 5),
+                            Text(
+                              'Sign up',
+                              style: TextStyle(
+                                fontFamily: 'Titillium Web',
+                                fontSize: 15,
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
                     ],
                   ),
                 ),
@@ -97,10 +124,4 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-}
-
-void main() {
-  runApp(MaterialApp(
-    home: LoginPage(),
-  ));
 }

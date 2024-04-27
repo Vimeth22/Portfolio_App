@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio_app/pages/settings/views/settings_page.dart';
 
 class NavigationProvider extends ChangeNotifier {
   int _selectedIndex = 1;
@@ -11,7 +12,7 @@ class NavigationProvider extends ChangeNotifier {
   }
 
   final List<Widget> _screens = [
-    Placeholder(),
+    SettingsPage(),
     Placeholder(),
     Placeholder(),
   ];

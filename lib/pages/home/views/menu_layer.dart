@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio_app/navigation/navigation_provider.dart';
 import 'package:portfolio_app/pages/login/views/login.dart';
+import 'package:portfolio_app/pages/signup/views/signup.dart';
 import 'package:provider/provider.dart';
 
 class MenuLayer extends StatefulWidget {
