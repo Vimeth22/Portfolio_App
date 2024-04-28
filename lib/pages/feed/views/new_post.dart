@@ -66,7 +66,7 @@ class _NewPostPageState extends State<NewPostPage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 30.0, top: 5.0, bottom: 8),
+              padding: const EdgeInsets.only(top: 5.0, bottom: 10),
               child: Text('Create a new post', textAlign: TextAlign.center, style: TextStyle(fontFamily: 'Titillium web', fontSize: 20, height: 1)),
             ),
             Padding(

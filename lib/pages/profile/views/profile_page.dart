@@ -85,35 +85,21 @@ class _ProfilePageState extends State<ProfilePage> {
                 style: TextStyle(fontFamily: "Titillium Web"),
               ),
             ),
-            if (_featuredImages != null) ...[
-              Center(
-                child: Container(
-                  height: MediaQuery.of(context).size.width * 0.3,
-                  child: ListView.builder(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemCount: 3,
-                      itemBuilder: (context, index) {
-                        var featuredImage;
+            Center(
+              child: Container(
+                height: MediaQuery.of(context).size.width * 0.3,
+                child: ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 3,
+                    itemBuilder: (context, index) {
+                      var featuredImage;
 
-                        if (index < _featuredImages!.length) {
-                          featuredImage = _featuredImages?[index];
-                        }
+                      if (_featuredImages != null && index < _featuredImages!.length) {
+                        featuredImage = _featuredImages?[index];
+                      }
 
-                        if (featuredImage == null) {
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                            child: ClipRRect(
-                              clipBehavior: Clip.antiAlias,
-                              borderRadius: BorderRadius.circular(5),
-                              child: Container(
-                                width: MediaQuery.of(context).size.width * .3,
-                                color: Colors.grey,
-                              ),
-                            ),
-                          );
-                        }
-
+                      if (featuredImage == null) {
                         return Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 4.0),
                           child: ClipRRect(
@@ -121,44 +107,56 @@ class _ProfilePageState extends State<ProfilePage> {
                             borderRadius: BorderRadius.circular(5),
                             child: Container(
                               width: MediaQuery.of(context).size.width * .3,
-                              child: Image.network(
-                                featuredImage,
-                                fit: BoxFit.cover,
-                              ),
+                              color: Color((math.Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0),
                             ),
                           ),
                         );
-                      }),
-                ),
+                      }
+
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                        child: ClipRRect(
+                          clipBehavior: Clip.antiAlias,
+                          borderRadius: BorderRadius.circular(5),
+                          child: Container(
+                            width: MediaQuery.of(context).size.width * .3,
+                            child: Image.network(
+                              featuredImage,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                      );
+                    }),
               ),
-              if (_featuredImages != null && _featuredImages?.length == 4) ...[
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 10),
-                  child: ClipRRect(
-                    clipBehavior: Clip.antiAlias,
-                    borderRadius: BorderRadius.circular(5),
-                    child: Container(
-                      height: MediaQuery.sizeOf(context).height * .4,
-                      child: Image.network(
-                        _featuredImages![3],
-                        fit: BoxFit.cover,
-                      ),
+            ),
+            if (_featuredImages != null && _featuredImages?.length == 4) ...[
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 10),
+                child: ClipRRect(
+                  clipBehavior: Clip.antiAlias,
+                  borderRadius: BorderRadius.circular(5),
+                  child: Container(
+                    height: MediaQuery.sizeOf(context).height * .4,
+                    child: Image.network(
+                      _featuredImages![3],
+                      fit: BoxFit.cover,
                     ),
                   ),
-                )
-              ] else ...[
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 10),
-                  child: ClipRRect(
-                    clipBehavior: Clip.antiAlias,
-                    borderRadius: BorderRadius.circular(5),
-                    child: Container(
-                      height: MediaQuery.sizeOf(context).height * .4,
-                      color: Colors.grey,
-                    ),
+                ),
+              )
+            ] else ...[
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 10),
+                child: ClipRRect(
+                  clipBehavior: Clip.antiAlias,
+                  borderRadius: BorderRadius.circular(5),
+                  child: Container(
+                    height: MediaQuery.sizeOf(context).height * .4,
+                    color: Color((math.Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0),
                   ),
-                )
-              ]
+                ),
+              )
             ],
             Padding(
               padding: const EdgeInsets.only(left: 30.0, top: 5.0, bottom: 8),
@@ -173,9 +171,12 @@ class _ProfilePageState extends State<ProfilePage> {
 
                 if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
                   return Center(
-                    child: Text(
-                      'No Posts :(',
-                      style: TextStyle(fontFamily: "Titillium Web"),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        'No Posts :(',
+                        style: TextStyle(fontFamily: "Titillium Web"),
+                      ),
                     ),
                   );
                 }
