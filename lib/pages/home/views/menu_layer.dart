@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio_app/navigation/navigation_provider.dart';
+import 'package:portfolio_app/pages/home/views/hero_page.dart';
 import 'package:portfolio_app/pages/login/views/login.dart';
 import 'package:portfolio_app/pages/signup/views/signup.dart';
 import 'package:provider/provider.dart';
@@ -18,7 +19,7 @@ class _MenuLayerState extends State<MenuLayer> {
     User? currentUser = FirebaseAuth.instance.currentUser;
 
     if (currentUser == null) {
-      return LoginPage();
+      return HeroPage();
     }
 
     void onItemTapped(int index) {

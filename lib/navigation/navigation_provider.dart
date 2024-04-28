@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio_app/pages/feed/views/feed_page.dart';
+import 'package:portfolio_app/pages/profile/views/profile_page.dart';
 import 'package:portfolio_app/pages/settings/views/settings_page.dart';
 
 class NavigationProvider extends ChangeNotifier {
@@ -13,8 +15,8 @@ class NavigationProvider extends ChangeNotifier {
 
   final List<Widget> _screens = [
     SettingsPage(),
-    Placeholder(),
-    Placeholder(),
+    FeedPage(),
+    ProfilePage(),
   ];
 
   List<Widget> get screens => _screens;

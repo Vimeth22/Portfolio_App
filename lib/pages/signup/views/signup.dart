@@ -58,6 +58,7 @@ class _SignUpPageState extends State<SignUpPage> {
       if (userId != null) {
         await _firestore.collection('users').doc(userId).set({
           'username': username,
+          'email': email
         });
       }
 
